@@ -1,4 +1,4 @@
-# SEDS: Scale-Free Evolutionary Dynamic Sparsification for Biologically Inspired Spiking Neural Networks
+# STEP: Staged Scale-Free Topology Evolution for Sparse Spiking Neural Networks
 
 ## Prerequisites
 
