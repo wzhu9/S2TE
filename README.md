@@ -1,4 +1,4 @@
-# STEP: Staged Scale-Free Topology Evolution for Sparse Spiking Neural Networks
+# S2TE: Staged Scale-Free Topology Evolution for Sparse Spiking Neural Networks
 
 ## Prerequisites
 
@@ -38,7 +38,7 @@ pip install -r requirements.txt
 Then, the running modes are as follows:
 
 ```
-#you should cd to the experiment directory such as ./SEDS_SNN/experiment#
+#you should cd to the experiment directory such as ./S2TE/experiment#
 
 #running codes on different datasets
 #CIFAR10
