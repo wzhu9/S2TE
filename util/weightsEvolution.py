@@ -108,6 +108,26 @@ def rewire_mask(weights, zeta, rf, epoch, stop_epoch, sparse_para_num, epoch_gro
             no_rewires = no_weights - torch.sum(rewired_weights).item()
 
     # no_rewires = no_weights - torch.sum(rewired_weights).item()
+
+    if epoch == epoch_stable - 1:
+    cur_nnz = int((rewired_weights != 0).sum().item())
+    tgt = sparse_para_num
+    if cur_nnz > tgt:  #prune
+        prune_num = cur_nnz - tgt
+        ones = torch.nonzero(rewired_weights == 1, as_tuple=False)
+        mags = weights.abs()[ones[:, 0], ones[:, 1]]
+        _, order = torch.topk(mags, k=prune_num, largest=False)
+        sel = ones[order]
+        rewired_weights[sel[:, 0], sel[:, 1]] = 0
+    elif cur_nnz < tgt:  #rewire
+        add_num = tgt - cur_nnz
+        zeros = torch.nonzero(rewired_weights == 0, as_tuple=False)
+        add_num = min(add_num, zeros.size(0))
+        idx = torch.randint(0, zeros.size(0), (add_num,))
+        sel = zeros[idx]
+        rewired_weights[sel[:, 0], sel[:, 1]] = 1
+    no_rewires = -1
+    
     while nr_add < no_rewires:
         if (torch.sum(rewired_weights == 0).item() == 0):
             break
