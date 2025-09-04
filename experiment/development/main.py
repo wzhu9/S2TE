@@ -245,8 +245,7 @@ def main():
         if(isinstance(x, nn.Conv2d)):
             convlist.append(x)
 
-    # print("Initial Conv Layers:", len(convlist))
-    convlist.pop(0)  # Remove the first convolutional layer in the list
+    convlist.pop(0)
     io_params = [(layer.in_channels, layer.out_channels) for layer in convlist]
     # print("I/O Parameters for remaining Conv Layers:", io_params)  # Print the input and output parameters of each convolutional layer
 
