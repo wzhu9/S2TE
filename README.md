@@ -45,7 +45,7 @@ Then, the running modes are as follows:
 python development/main.py --seed 60 --arch resnet19  --auto_aug --cutout --wd 5e-4 --dataset CIFAR10 --act mns_rec  --T 2 --decay 0.5 --thresh 1.0 --data_path data/CIFAR10   --bn_type tdbn  --gamma 1.0 --sparsity 0.7  --phi_c 0.1 --phi_a  0.3 --zeta 0.4
 
 #CIFAR100
-python development/main.py --seed 60 --arch resnet19  --auto_aug --cutout --wd 5e-4 --dataset CIFAR100 --act mns_rec  --T 2 --decay 0.5 --thresh 1.0 --data_path data/CIFAR100   --bn_type tdbn  --gamma 1.0 --sparsity 0.7  --phi_c 0.2 --phi_a  0.4 --zeta 0.4
+python development/main.py --seed 60 --arch resnet19  --auto_aug --cutout --wd 5e-4 --dataset CIFAR100 --act mns_rec  --T 2 --decay 0.5 --thresh 1.0 --data_path data/CIFAR100   --bn_type tdbn  --gamma 1.0 --sparsity 0.7  --phi_c 0.1 --phi_a  0.3 --zeta 0.1
 
 #DVSCIFAR10
 python dvs/main.py --seed 200 --arch VGGSNN2  --bn_type tdbn --wd 1e-3 --num_workers 4  --act mns_rec --decay 0.5  --alpha 3.0 --dataset CIFAR10DVS --data_path ./data/CIFAR10DVS --sparsity 0.7 --zeta 0.3
