@@ -74,8 +74,8 @@ def runTrain(epoch, train_ldr, optimizer, model, evaluator, args=None, encoder=N
                 mask_extended = weights_mask_list[i].unsqueeze(2).unsqueeze(3)
                 constraint_weights = torch.mul(conv_list[i].weight.data, mask_extended)
                 conv_list[i].weight.data = constraint_weights
-        constraint_weights = torch.mul(model.classifier[0].layer.weight.data, weights_mask_list[len(conv_list)])
-        model.classifier[0].layer.weight.data = constraint_weights
+        # constraint_weights = torch.mul(model.classifier[0].layer.weight.data, weights_mask_list[len(conv_list)])
+        # model.classifier[0].layer.weight.data = constraint_weights
 
 
         predict = torch.argmax(output.mean(0), axis=1)
@@ -308,9 +308,9 @@ def main():
 
 
     # Fully connected layer initialization
-    sparse_weights_item = torch.mul(weights_mask_list[conv_num], m.weight.data)
-    sparse_weights_list.append(sparse_weights_item)
-    m.weight.data = sparse_weights_item
+    # sparse_weights_item = torch.mul(weights_mask_list[conv_num], m.weight.data)
+    # sparse_weights_list.append(sparse_weights_item)
+    # m.weight.data = sparse_weights_item
 
 
 
@@ -410,12 +410,12 @@ def main():
                 convlist[i].weight.data = torch.mul(weights_mask_core_extended, weights)
 
         # Weights of the fully connected layer are pruned and regenerated after each epoch
-        weights = model.classifier[0].layer.weight.data
-        weights_mask, weights_mask_core, fixed_stop_epoch = rewire_mask(weights, zeta, rf, epoch, stop_epoch,
-                                                                        sparse_para_num_list[len(io_params) - 1], epoch_growth, epoch_stable)
-        stop_epoch = fixed_stop_epoch
-        weights_mask_list[len(io_params) - 1] = weights_mask
-        model.classifier[0].layer.weight.data = torch.mul(weights_mask_core, weights)
+        # weights = model.classifier[0].layer.weight.data
+        # weights_mask, weights_mask_core, fixed_stop_epoch = rewire_mask(weights, zeta, rf, epoch, stop_epoch,
+        #                                                                 sparse_para_num_list[len(io_params) - 1], epoch_growth, epoch_stable)
+        # stop_epoch = fixed_stop_epoch
+        # weights_mask_list[len(io_params) - 1] = weights_mask
+        # model.classifier[0].layer.weight.data = torch.mul(weights_mask_core, weights)
 
     log.info('Finish training: the best training accuracy is {} in epoch {}. \n The relate checkpoint path: {}'.format(
         best_acc, best_epoch, os.path.join(args.ckpt_path, model_name + '.pth')))
